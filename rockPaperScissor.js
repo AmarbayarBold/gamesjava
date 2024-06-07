@@ -1,5 +1,5 @@
 //
-// Acecss to the results+button input
+// variables declared
 //
 const playerText = document.querySelector("#playerText");
 
@@ -14,8 +14,7 @@ let computer;
 let result;
 //
 // eventlistener added to button
-// sets choice input (whether it is rock, paper or scissor) and calls the function to determine
-// to check the winner +show result
+// sets choice input (whether it is rock, paper or scissor)
 //
 choiceButtons.forEach(button => button.addEventListener("click", () => {
 
@@ -29,8 +28,7 @@ choiceButtons.forEach(button => button.addEventListener("click", () => {
 }));
 //
 // generate random integer to store
-// switches based on it
-// check if draw, otherwise alternatives +displayed
+// switches 
 //
 function computerTurn(){
   const randNum = Math.floor(Math.random()*3) + 1;
@@ -47,6 +45,10 @@ function computerTurn(){
       break;
   }
 }
+//
+// Determine Winner
+// Main Logic
+//
 function checkWinner(player, computer){
 console.log(typeof player, typeof computer)
 if (player === computer) {
