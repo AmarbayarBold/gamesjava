@@ -1,31 +1,8 @@
-//
-// variables declared
-//
-const playerText = document.querySelector("#playerText");
-
-const computerText = document.querySelector("#computerText");
-
-const resultText = document.querySelector("#resultText");
-
-const choiceButtons = document.querySelectorAll(".choiceButton");
-
 let player;
 let computer;
 let result;
-//
-// eventlistener added to button
-// sets choice input (whether it is rock, paper or scissor)
-//
-choiceButtons.forEach(button => button.addEventListener("click", () => {
 
-  player = button.textContent;
-  console.log(player)
-  computerTurn();
-  playerText.textContent = `Player: ${player}`;
-  computerText.textContent = `Computer: ${computer}`;
-  result = checkWinner(player, computer);
-  resultText.textContent = `You : ${result}`;
-}));
+
 //
 // generate random integer to store
 // switches 
@@ -50,12 +27,47 @@ function computerTurn(){
 // Main Logic
 //
 function checkWinner(player, computer){
-console.log(typeof player, typeof computer)
 if (player === computer) {
-  return "draw"}
+  return "draw"
+}
 if ((player === "Rock" && computer === "Scissor") ||
-(player === "Paper" && computer === "Rock") ||
-(player === "Scissor" && computer === "Paper"))
-{return "win"}
+    (player === "Paper" && computer === "Rock") ||
+    (player === "Scissor" && computer === "Paper"))
+{
+  return "win"
+}
 return "lose"
 }
+
+//
+// Player's single round of the game
+//
+
+function playRound(playerMove) {
+  computerTurn();
+  const result = checkWinner(playerMove, computer);
+  console.log("You choose " + playerMove + ".Computer chose " + computer+".You: " +result + "!");
+}
+
+function isValidMove(move) {
+  const validMoves =['Rock', 'Paper', 'Scissor']
+  return validMoves.includes(move)
+}
+
+function main() {
+  const args = process.argv.slice(2)
+  if (args.length === 0) {
+    console.log("Error, please choose rock or paper or scissor")
+    return null
+  }
+  const playerMove = args[0]
+  if (!isValidMove(playerMove)) {
+    console.log("Error, invalid move, pick rock, paper or scissor")
+    return null
+  }
+  playRound(playerMove)
+}
+
+// run main function
+
+main();
